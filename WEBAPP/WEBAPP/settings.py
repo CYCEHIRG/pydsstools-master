@@ -70,7 +70,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'WEBAPP.wsgi.application'
 
-CSRF_TRUSTED_ORIGINS = ['https://5953.zeabur.app']
+CSRF_TRUSTED_ORIGINS = ['https://5953.zeabur.app','http://5953.zeabur.app']
 
 
 
