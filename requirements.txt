@@ -6,7 +6,6 @@ affine
 gdal>=3.2.2
 rasterio>=1.2.1
 matplotlib
-
 django
 flask
 flask_restful
