@@ -6,7 +6,7 @@ RUN apt-get -y update \
 
 RUN apt-get -y install gfortran python3.8 python3-pip 
 
-COPY . ../
+COPY . ./
 
 RUN chmod +x ras/v61/*
 #RUN chmod +x ras/Muncie/*
