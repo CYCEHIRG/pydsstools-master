@@ -4,7 +4,7 @@ RUN apt-get -y update \
    && apt-get -y install wget \
     && apt-get -y install unzip
 
-RUN apt-get -y install gfortran python3.8 python3-pip 
+RUN apt-get -y install gfortran python3.10 python3-pip 
 
 COPY . ./
 
