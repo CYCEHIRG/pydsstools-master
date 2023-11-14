@@ -1,4 +1,4 @@
-FROM ghcr.ioosgeogdalubuntu-small-3.7.2
+FROM ghcr.io/osgeo/gdal:ubuntu-small-3.7.2
 
 RUN apt-get -y update \
    && apt-get -y install wget \
