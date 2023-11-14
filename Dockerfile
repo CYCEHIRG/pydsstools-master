@@ -14,7 +14,7 @@ RUN chmod +x ras/v61/*
 RUN chmod +x WEBAPP/WEBAPP/*
 
 RUN python -m pip install --upgrade pip
-RUN python -m pip install --upgrade -r requirements.txt
+RUN python -m pip install --no-cache-dir --upgrade -r requirements.txt
 RUN python setup.py install
 
 # Entrypoint script
