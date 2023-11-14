@@ -13,9 +13,9 @@ RUN chmod +x ras/v61/*
 #RUN chmod +x ras/Muncie/wrk_source/*
 RUN chmod +x WEBAPP/WEBAPP/*
 
-RUN python -m pip install --upgrade pip \
-    && pip install --upgrade -r requirements.txt \
-    && python setup.py install
+RUN python -m pip install --upgrade pip
+RUN pip install --upgrade -r requirements.txt
+RUN python setup.py install
 
 # Entrypoint script
 RUN chmod +x /script.sh
