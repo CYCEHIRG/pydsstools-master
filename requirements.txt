@@ -6,7 +6,7 @@ affine
 gdal>=3.2.2
 rasterio>=1.2.1
 matplotlib
-https://github.com/gyanz/pydsstools/zipball/master
+
 django
 flask
 flask_restful
