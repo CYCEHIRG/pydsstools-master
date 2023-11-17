@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home Page</title>
+</head>
+<body>
+
+<form action="https://5953.zeabur.app/download_bysection/" method="get">
+    <label for="section_input">输入斷面名稱：</label>
+    <input type="text" id="section_input" name="section_name" required>
+    <input type="submit" value="下载单一断面结果">
+</form>
+
+<form action="https://5953.zeabur.app/download_bytime/" method="get">
+    <label for="time_input">输入时间：</label>
+    <input type="text" id="time_input" name="time_value" required>
+    <input type="submit" value="下载根据时间之结果">
+</form>
+
+<p>{{ message_list.0 }}</p>
+<p>{{ message_list.1 }}</p>
+<p>{{ message_list.2 }}</p>
+<p>{{ message_list.3 }}</p>
+
+</body>
+</html>
