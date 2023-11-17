@@ -15,17 +15,6 @@ folder_path = '/WEBAPP'
 app = Flask(__name__)
 api = Api(app)
 local_path = 'C:\\Users\\PatZh\\Desktop\\Paper_Lian\\docker\\file'
-def get_running_container_id(container_name):
-    try:
-        command = f'docker ps -qf "name={container_name}"'
-        result = subprocess.run(command, shell=True, stdout=subprocess.PIPE, text=True)
-        container_id = result.stdout.strip()
-        return container_id
-    except Exception as e:
-        print(f"Error getting container ID: {e}")
-        return None
-
-container_id = get_running_container_id('hec-unsteady3')
 
 # def upload_files(request):
 #     if request.method == "POST":
@@ -58,30 +47,11 @@ def upload_files(request):
     else:
         return render(request, "upload.html")
 
-
-# def handle_uploaded_file(file, folder_path, new_filename):
-    # 获取上传文件的扩展名
-    file_extension = os.path.splitext(file.name)[1]
-
-    # 拼接新文件名
-    new_file_name = new_filename + file_extension
-
-    # 构建完整的文件路径
-    file_path = os.path.join(folder_path, new_file_name)
-
-    # 写入文件
-    with open(file_path, 'wb') as destination:
-        for chunk in file.chunks():
-            destination.write(chunk)
-
-    return file_path
-
     
 def sim(request):
     subprocess.run(['./run-model.sh'], shell=True)
     
     return render(request, 'result.html')
-
 
 def download_file1(request):
     # Create an application context
