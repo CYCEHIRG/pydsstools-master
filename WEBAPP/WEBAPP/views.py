@@ -93,7 +93,7 @@ def run_plot(time_value):
     plt.xlabel('Crosssections')
     plt.ylabel('Flow')
     plt.savefig('fig1.png')
-    y.clear()
+    np.delete(y)
 
 # def run_plot(time_value):
 #     dss_file = "/WEBAPP/Muncie.dss"
@@ -144,5 +144,5 @@ def run_plot2(section_name):
     plt.xlabel('Times')
     plt.ylabel('Flow')
     plt.savefig('/WEBAPP/fig1.png')
-    y.clear()
+    np.delete(y)
 # Create your views here.
