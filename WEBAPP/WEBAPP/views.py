@@ -115,12 +115,13 @@ def run_plot(time_value):
 
 
 def run_plot2(section_name):
+    x = []
+    y = []
     section_index = int(section_name)
     # subprocess.run(['docker', 'exec', '-it', container_id, 'python', '/pydsstools/new-plot.py'], capture_output=True, text=True)
     dss_file = '/WEBAPP/Muncie.dss'
     pathname_pattern = "/*/*/LOCATION-FLOW/*/*/*/"
-    x = []
-    y = []
+
     
     fid = HecDss.Open(dss_file)
     path_list = fid.getPathnameList(pathname_pattern, sort=1)
