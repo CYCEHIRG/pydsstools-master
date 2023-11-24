@@ -6,17 +6,19 @@
 </head>
 <body>
 
-<form action="https://5953.zeabur.app/download_bysection/" method="get">
-    <label for="section_input">输入斷面名稱：</label>
+<form action="http://140.135.121.165:5555/download_bysection/" method="get">
+    <label for="section_input">输入斷面編號：</label>
     <input type="text" id="section_input" name="section_name" required>
-    <input type="submit" value="下载单一断面结果">
+    <input type="submit" value="下載單一斷面之结果">
 </form>
 
-<form action="https://5953.zeabur.app/download_bytime/" method="get">
-    <label for="time_input">输入时间：</label>
+<form action="http://140.135.121.165:5555/download_bytime/" method="get">
+    <label for="time_input">输入時間：</label>
     <input type="text" id="time_input" name="time_value" required>
-    <input type="submit" value="下载根据时间之结果">
+    <input type="submit" value="下載根據時間之结果">
+    <label for="section_input">Hint:輸入模擬時間,例如:0245</label>
 </form>
+<iframe src="https://www.google.com/maps/d/u/0/embed?mid=1ss78RMtHDFsqYSoG9x2ddFPxhLqGbrc&ehbc=2E312F" width="640" height="480"></iframe>
 
 <p>{{ message_list.0 }}</p>
 <p>{{ message_list.1 }}</p>
