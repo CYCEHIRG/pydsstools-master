@@ -77,6 +77,7 @@ def download_file2(request):
 
 
 def run_plot(time_value):
+    y = []
     dss_file = "/WEBAPP/Muncie.dss"
     pathname= f"/White Muncie//LOCATION-FLOW//02JAN1900 {time_value}/RESULTS/"
     fid = HecDss.Open(dss_file)
