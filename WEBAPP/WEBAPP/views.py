@@ -93,6 +93,7 @@ def run_plot(time_value):
     plt.xlabel('Crosssections')
     plt.ylabel('Flow')
     plt.savefig('fig1.png')
+    plt.close()
     y = np.empty_like(y)
     idx = np.empty_like(idx)
 
@@ -145,6 +146,7 @@ def run_plot2(section_name):
     plt.xlabel('Times')
     plt.ylabel('Flow')
     plt.savefig('/WEBAPP/fig1.png')
+    plt.close()
     x = np.empty_like(x)
     y = np.empty_like(y)
 # Create your views here.
