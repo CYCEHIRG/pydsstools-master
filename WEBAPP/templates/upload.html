@@ -3,11 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>上傳HEC-RAS輸入儅</title>
+    <style>
+        h1 {text-align: center;}
+    </style>
 </head>
 <body>
     <form method="post" action="" enctype="multipart/form-data">
         {% csrf_token %}
-        <h1>數據上傳</h1>
+        <h1>HEC-RAS模擬程式</h1>
         請上傳HEC-RAS輸入檔案：<br>
         <input type="file" name="files" multiple=""><br>
         <input type="submit" value="上傳">
