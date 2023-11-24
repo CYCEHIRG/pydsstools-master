@@ -139,6 +139,7 @@ def run_plot2(section_name):
         x.append(i)
         value = np.array(pd.iloc[:, 1].values)
         y.append(value[section_index])
+        y = y[:-13]
 
     
     plt.plot(x, y)
