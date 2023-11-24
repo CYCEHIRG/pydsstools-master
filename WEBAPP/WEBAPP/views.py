@@ -65,28 +65,20 @@ def download_file1(request):
     return response
      
 def download_file2(request):
-    
     # Create an application context
     with app.app_context():
-        run_plot()
-        local_path = 'C:\\Users\\PatZh\\Desktop\\Paper_Lian\\docker\\file\\'
-        os.system('docker cp {}:{} {}'.format(container_id, folder_path+'/fig1.png', local_path))
-
-        # Open the local file and create a response
-        with open(local_path+'\\fig1.png', 'rb') as file:
-            response = Response(file.read(), content_type='application/octet-stream')
-            response.headers['Content-Disposition'] = 'attachment; filename="fig1.png"'
-            
-        file = open('C:\\Users\\PatZh\\Desktop\\Paper_Lian\\docker\\file\\fig1.png', 'rb')
-        response = FileResponse(file)
-        response['Content-Type'] = 'application/octet-stream'
-        response['Content-Disposition'] = 'attachment;filename="fig1.png"'
-    return render(request,'result.html')
+        time_value = request.GET.get('time_value', '')
+        run_plot(time_value)
+    file = open('/WEBAPP/fig1.png', 'rb')
+    response = FileResponse(file)
+    response['Content-Type'] = 'application/octet-stream'
+    response['Content-Disposition'] = 'attachment;filename="fig1.png"'
+    return response
 
 
-def run_plot():
-    dss_file = "Muncie.dss"
-    pathname= "/White Muncie/*/LOCATION-FLOW/*/02JAN1900*/*/"
+def run_plot(time_value):
+    dss_file = "/WEBAPP/Muncie.dss"
+    pathname= f"/White Muncie//LOCATION-FLOW//02JAN1900 {time_value}/RESULTS/"
     fid = HecDss.Open(dss_file)
     pd = fid.read_pd(pathname)
     idx = pd.index.tolist()
@@ -100,6 +92,26 @@ def run_plot():
     plt.xlabel('Crosssections')
     plt.ylabel('Flow')
     plt.savefig('fig1.png')
+
+# def run_plot(time_value):
+#     dss_file = "/WEBAPP/Muncie.dss"
+#     time = int(time_value)
+#     pathname = f"/*/*/LOCATION-FLOW/*/* {time}/*/"
+#     fid = HecDss.Open(dss_file)
+#     pd = fid.read_pd(pathname)
+#     pd.insert(0, pd.index.name, pd.index)
+#     y = np.array(pd.iloc[:, 1].values)
+#     print(y)
+    
+#     # 如果 idx 是字符串，请确保转换为适当的数值类型
+#     # idx = pd.index.astype(int).tolist()
+    
+#     plt.plot(pd.index, y)
+#     plt.title(pathname)
+#     plt.xlabel('Crosssections')
+#     plt.ylabel('Flow')
+#     plt.savefig('fig1.png')
+
 
 def run_plot2(section_name):
     section_index = int(section_name)
