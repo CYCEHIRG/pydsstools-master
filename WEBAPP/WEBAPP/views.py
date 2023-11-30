@@ -43,7 +43,7 @@ def upload_files(request):
                 for chunk in f.chunks():
                     destination.write(chunk)
                 destination.close()
-            subprocess.run(['mv example.p01.tmp.hdf /WEBAPP/wrk_source'], shell=True)
+            subprocess.run(['mv example.p01.tmp.hdf /WEBAPP/wrk_source/'], shell=True)
             return render(request, 'upload_done.html')
     else:
         return render(request, "upload.html")
@@ -51,6 +51,7 @@ def upload_files(request):
     
 def sim(request):
     subprocess.run(['./run-model.sh'], shell=True)
+    subprocess.run(['mv *.dss example.dss'], shell=True)
     
     return render(request, 'result.html')
 
@@ -140,7 +141,6 @@ def run_plot2(section_name):
         x.append(i)
         value = np.array(pd.iloc[:, 1].values)
         y.append(value[section_index])
-
     x1 = x[:-16]
     y1 = y[:-16]
 
