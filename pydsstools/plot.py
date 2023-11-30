@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 
-dss_file = "C:\\Users\\PatZh\\Desktop\\Muncie.dss"
+dss_file = "C:\\Users\\PatZh\\Desktop\\xindian\\example.dss"
 pathname = "/White Muncie//LOCATION-FLOW//02JAN1900 0245/RESULTS/"
 
 fid = HecDss.Open(dss_file)
