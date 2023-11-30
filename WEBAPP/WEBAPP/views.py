@@ -80,7 +80,7 @@ def download_file2(request):
 def run_plot(time_value):
     y = []
     dss_file = "/WEBAPP/example.dss"
-    pathname= f"/Tamsui xindian//LOCATION-FLOW//09AUG2009 {time_value}/Plan 01/"
+    pathname= f"/Tamsui xindian//LOCATION-FLOW//09AUG2009 {time_value}/RESULT/"
     fid = HecDss.Open(dss_file)
     pd = fid.read_pd(pathname)
     idx = pd.index.tolist()
@@ -140,9 +140,9 @@ def run_plot2(section_name):
         x.append(i)
         value = np.array(pd.iloc[:, 1].values)
         y.append(value[section_index])
-        x1 = x[:-16]
-        y1 = y[:-16]
 
+    x1 = x[:-16]
+    y1 = y[:-16]
 
     
     plt.plot(x1, y1)
