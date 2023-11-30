@@ -43,6 +43,7 @@ def upload_files(request):
                 for chunk in f.chunks():
                     destination.write(chunk)
                 destination.close()
+            subprocess.run(['mv example.p01.tmp.hdf /WEBAPP/wrk_source'], shell=True)
             return render(request, 'upload_done.html')
     else:
         return render(request, "upload.html")
@@ -78,8 +79,8 @@ def download_file2(request):
 
 def run_plot(time_value):
     y = []
-    dss_file = "/WEBAPP/Muncie.dss"
-    pathname= f"/White Muncie//LOCATION-FLOW//02JAN1900 {time_value}/RESULTS/"
+    dss_file = "/WEBAPP/example.dss"
+    pathname= f"/Tamsui xindian//LOCATION-FLOW//09AUG2009 {time_value}/Plan 01/"
     fid = HecDss.Open(dss_file)
     pd = fid.read_pd(pathname)
     idx = pd.index.tolist()
@@ -122,7 +123,7 @@ def run_plot2(section_name):
     y = []
     section_index = int(section_name)
     # subprocess.run(['docker', 'exec', '-it', container_id, 'python', '/pydsstools/new-plot.py'], capture_output=True, text=True)
-    dss_file = '/WEBAPP/Muncie.dss'
+    dss_file = '/WEBAPP/example.dss'
     pathname_pattern = "/*/*/LOCATION-FLOW/*/*/*/"
 
     
@@ -139,8 +140,8 @@ def run_plot2(section_name):
         x.append(i)
         value = np.array(pd.iloc[:, 1].values)
         y.append(value[section_index])
-        x1 = x[:-13]
-        y1 = y[:-13]
+        x1 = x[:-16]
+        y1 = y[:-16]
 
 
     
