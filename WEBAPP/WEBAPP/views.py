@@ -81,7 +81,7 @@ def download_file2(request):
 def run_plot(time_value):
     y = []
     dss_file = "/WEBAPP/example.dss"
-    pathname= f"/Tamsui xindian//LOCATION-FLOW//09AUG2009 {time_value}/RESULT/"
+    pathname= f"/Tamsui xindian//LOCATION-ELEV//09AUG2009 {time_value}/RESULT/"
     fid = HecDss.Open(dss_file)
     pd = fid.read_pd(pathname)
     idx = pd.index.tolist()
@@ -122,10 +122,10 @@ def run_plot(time_value):
 def run_plot2(section_name):
     x = []
     y = []
-    section_index = int(section_name)
+    section_index = int(-section_name)
     # subprocess.run(['docker', 'exec', '-it', container_id, 'python', '/pydsstools/new-plot.py'], capture_output=True, text=True)
     dss_file = '/WEBAPP/example.dss'
-    pathname_pattern = "/*/*/LOCATION-FLOW/*/*/*/"
+    pathname_pattern = "/*/*/LOCATION-ELEV/*/*/*/"
 
     
     fid = HecDss.Open(dss_file)
