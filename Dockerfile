@@ -1,4 +1,4 @@
-FROM ghcr.io/osgeo/gdal:ubuntu-small-3.8.0
+FROM ghcr.io/osgeo/gdal:ubuntu-small-3.8.1
 
 RUN apt-get -y update \
    && apt-get -y install wget \
