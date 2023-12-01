@@ -4,15 +4,16 @@ import numpy as np
 
 
 dss_file = "C:\\Users\\PatZh\\Desktop\\xindian\\example.dss"
-pathname = "/White Muncie//LOCATION-FLOW//02JAN1900 0245/RESULTS/"
+pathname = "/Tamsui xindaian//LOCATION-ELEV//02JAN1900 0250/RESULTS/"
 
-def run_plot2(section_name):
+def run_plot2(time_value):
     x = []
     y = []
-    section_index = int(section_name)
-    # subprocess.run(['docker', 'exec', '-it', container_id, 'python', '/pydsstools/new-plot.py'], capture_output=True, text=True)
-    dss_file = "C:\\Users\\PatZh\\Desktop\\xindian\\example.dss"
-    pathname_pattern = "/*/*/LOCATION-FLOW/*/*/*/"
+    section_index = int(-time_value) 
+    #因為矩陣是反的，所以索引值用負的。
+    #例如:斷面0-77，矩陣[0]的數值就是斷面77
+    dss_file = 'C:\\Users\\PatZh\\Desktop\\xindian\\example.dss'
+    pathname_pattern = "/*/*/LOCATION-ELEV/*/*/*/"
 
     
     fid = HecDss.Open(dss_file)
@@ -28,9 +29,9 @@ def run_plot2(section_name):
         x.append(i)
         value = np.array(pd.iloc[:, 1].values)
         y.append(value[section_index])
-        x1 = x[:-16]
-        y1 = y[:-16]
-
+        print(value)
+    x1 = x[:-16]
+    y1 = y[:-16]
 
     
     plt.plot(x1, y1)
@@ -41,6 +42,5 @@ def run_plot2(section_name):
     plt.close()
     x = np.empty_like(x)
     y = np.empty_like(y)
-# Create your views here.
-
-run_plot2('76')
+    return y1[0]
+print(run_plot2(27))
