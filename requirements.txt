@@ -10,3 +10,5 @@ https://github.com/gyanz/pydsstools/zipball/master
 django
 flask
 flask_restful
+h5py
+
