@@ -67,25 +67,75 @@
             width: 640px;
         }
 
+        .input-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+        }
+        .results-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            justify-content: center;
+            align-items: center;
+            z-index: 1;
+        }
+
+        .modal-content {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        #resultImage {
+            max-width: 100%;
+            height: auto;
+        }
+
+
     </style>
+        
 </head>
 <body>
     <h1>HEC-RAS模擬程式</h1>
 
-    <form action="https://5953.zeabur.app/download_bysection/" method="get">
-        <label for="section_input">输入斷面編號：</label>
-        <input type="text" id="section_input" name="section_name" required>
-        <input type="submit" value="下載單一斷面之结果">
-    </form>
+    <div class="input-container">
+        <form action="http://140.135.121.165:5555/download_bysection/" method="get" onsubmit="return validateSectionName();">
+            <label for="section_input">输入斷面編號：</label>
+            <input type="text" id="section_input" name="section_name" required>
+            <input type="submit" value="下載單一斷面之结果">
+        </form>
 
-    <form action="https://5953.zeabur.app/download_bytime/" method="get">
-        <label for="time_input">输入時間：</label>
-        <input type="text" id="time_input" name="time_value" required>
-        <input type="submit" value="下載根據時間之结果">
-        <p>Hint:輸入模擬時間，例如: 0245</p>
-    </form>
+        <form action="http://140.135.121.165:5555/download_bytime/" method="get">
+            <label for="time_input">输入時間：</label>
+            <select id="time_input" name="time_value" required>
+                {% for option in result %}
+                    <option value="{{ option }}">{{ option }}</option>
+                {% endfor %}
+            </select>
+            <input type="submit" value="下載單一斷面之结果">            
+            <p>Hint1：09AUG2009 0035代表2009/8/9 00:35</p>
+            <p>Hint2：LOCATION-ELEV =水位
+                LOCATION-FLOW = 流量
+            </p>
+        </form>
+    </div>
 
-    <iframe src="https://www.google.com/maps/d/u/0/embed?mid=1ss78RMtHDFsqYSoG9x2ddFPxhLqGbrc&ehbc=2E312F" width="640" height="640"></iframe>
+    <div class="results-container">
+        <iframe src="https://www.google.com/maps/d/u/0/embed?mid=1ss78RMtHDFsqYSoG9x2ddFPxhLqGbrc&ehbc=2E312F" width="640" height="480"></iframe>
+    </div>
+
     <script>
         // When the page is loaded, remove the "hidden" class to trigger the fade-in animation
         document.addEventListener("DOMContentLoaded", function() {
