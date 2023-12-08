@@ -1,0 +1,15 @@
+	關於db.sqlite3，因我沒有用到sqlite，直接放置即可。
+
+	run-model.sh就是上一層提到的，要修改就修改這一個，但通常不會動到它。
+
+	run-server.sh為運行Django的檔案，只是將python指令以shell檔呼叫而已。
+---------------------------------------------------以下為資料夾部分---------------------------------------------
+
+	templates存放網頁的html檔，注意html中的url，可能會跟著你的網域、ip要做變動。
+	這一層的WEBAPP存放著views.py、urls.py、settings.py，三者與html檔的關係請自
+行google。算是重要的資料夾。
+
+	wrk_source是用來存放修剪的plan檔，裡面已經有一個範例，你只需要知道
+
+Muncie.p04.tmp.hdf實際上是經由使用者上傳Muncie.p04.hdf後所修剪出來的檔案。詳細可以
+下載Linux版本的HEC-RAS，裡面有說明。
