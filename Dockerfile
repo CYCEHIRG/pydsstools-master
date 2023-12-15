@@ -12,6 +12,7 @@ COPY . ./
 
 RUN chmod +x ras/v61/*
 RUN chmod +x WEBAPP/WEBAPP/*
+RUN chmod +x WEBAPP/static/*
 
 RUN python -m pip install --upgrade pip \
     && pip install --upgrade -r requirements.txt \
