@@ -1,4 +1,4 @@
-FROM ghcr.io/osgeo/gdal:ubuntu-small-3.8.1
+FROM ghcr.io/osgeo/gdal:ubuntu-small-latest
 #注意！這個模板時常更新，若沒辦法建立image就查看是否有更新
 #論文撰寫時此模板版本為3.8.1，嫌麻煩可以把3.8.1改成latest，應該不會有問題
 
