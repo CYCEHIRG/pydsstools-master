@@ -67,7 +67,7 @@ def download_file1(request):
     with app.app_context():
         section_name = request.GET.get('section_name', '')
         run_plot2(section_name)
-    file = open('/WEBAPP/templates/image/fig1.png', 'rb')
+    file = open('/WEBAPP/fig1.png', 'rb')
     response = FileResponse(file)
     response['Content-Type'] = 'application/octet-stream'
     response['Content-Disposition'] = 'attachment;filename="fig1.png"'
@@ -79,7 +79,7 @@ def download_file2(request):
     with app.app_context():
         time_value = request.GET.get('time_value', '')
         run_plot(time_value)
-    file = open('/WEBAPP/templates/image/fig1.png', 'rb')
+    file = open('/WEBAPP/fig1.png', 'rb')
     response = FileResponse(file)
     response['Content-Type'] = 'application/octet-stream'
     response['Content-Disposition'] = 'attachment;filename="fig1.png"'
@@ -105,7 +105,7 @@ def run_plot(time_value):
     plt.title(pathname)
     plt.xlabel('Crosssections')
     plt.ylabel('Flow')
-    plt.savefig('/WEBAPP/templates/image/fig1.png')
+    plt.savefig('/WEBAPP/fig1.png')
     plt.close()
     y = np.empty_like(y)
     idx = np.empty_like(idx)
@@ -176,6 +176,6 @@ def run_plot2(section_name):
         y = []      
         k = k + 1
     plt.tight_layout()
-    plt.savefig('/WEBAPP/templates/image/fig1.png')
+    plt.savefig('/WEBAPP/fig1.png')
     plt.close()
 # Create your views here.
