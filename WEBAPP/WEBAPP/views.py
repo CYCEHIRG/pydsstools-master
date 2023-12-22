@@ -154,13 +154,13 @@ def run_plot2(section_name):
             if k == 1:
                 x1 = x[:-5]
                 y1 = y[:-5]
-                xobs = np.arange(0,25)
-                obs = [3.29,3.31,3.3,3.2,3.06,3.04,3.04,3.07,3.08,3.03,3.04,3.2,3.29,3.24
-                       ,3.22,3.21,3.23,3.25,3.24,3.25,3.27,3.26,3.2,3.01,3.18]
+                # xobs = np.arange(0,25)
+                # obs = [3.29,3.31,3.3,3.2,3.06,3.04,3.04,3.07,3.08,3.03,3.04,3.2,3.29,3.24
+                #        ,3.22,3.21,3.23,3.25,3.24,3.25,3.27,3.26,3.2,3.01,3.18]
                 plt.subplot(2,1, k)
-                line1, = plt.plot(x1,y1,color = 'b',linewidth ='1',label = 'sim')
-                line2, = plt.plot(xobs,obs,color = 'r', linewidth = '1',label = 'obs')
-                plt.legend(handles = [line1,line2],loc = 'upper right')
+                plt.plot(x1,y1,color = 'b',linewidth ='1',label = 'sim')
+                # line2, = plt.plot(xobs,obs,color = 'r', linewidth = '1',label = 'obs')
+                # plt.legend(handles = [line1,line2],loc = 'upper right')
                 plt.title(f'NO.{section_name} {TYPE} Data')
                 plt.xlabel('Times')
                 plt.ylabel('ELEV')
