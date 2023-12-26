@@ -176,6 +176,6 @@ def run_plot2(section_name):
         y = []      
         k = k + 1
     plt.tight_layout()
-    plt.savefig('/WEBAPP/fig1.png')
+    plt.savefig('./static/fig1.png')
     plt.close()
 # Create your views here.
