@@ -78,7 +78,7 @@ def download_file2(request):
 
 def download_png(request):
     #總之跟download_file1()同理
-    file = open('./static/WEBAPP/fig1.png', 'rb')
+    file = open('./static/fig1.png', 'rb')
     response = FileResponse(file)
     response['Content-Type'] = 'application/octet-stream'
     response['Content-Disposition'] = 'attachment;filename="fig1.png"'
@@ -104,7 +104,7 @@ def run_plot(time_value):
     plt.title(pathname)
     plt.xlabel('Crosssections')
     plt.ylabel('Flow')
-    plt.savefig('/WEBAPP/fig1.png')
+    plt.savefig('./static/fig1.png')
     plt.close()
     y = np.empty_like(y)
     idx = np.empty_like(idx)
