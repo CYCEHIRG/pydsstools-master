@@ -67,11 +67,6 @@ def download_file1(request):
     with app.app_context():
         section_name = request.GET.get('section_name', '')
         run_plot2(section_name)
-    file = open('/WEBAPP/fig1.png', 'rb')
-    response = FileResponse(file)
-    response['Content-Type'] = 'application/octet-stream'
-    response['Content-Disposition'] = 'attachment;filename="fig1.png"'
-
     return render(request,'showpic.html')
      
 def download_file2(request):
@@ -79,7 +74,11 @@ def download_file2(request):
     with app.app_context():
         time_value = request.GET.get('time_value', '')
         run_plot(time_value)
-    file = open('/WEBAPP/fig1.png', 'rb')
+    return render(request,'showpic.html')
+
+def download_png(request):
+    #總之跟download_file1()同理
+    file = open('./static/WEBAPP/fig1.png', 'rb')
     response = FileResponse(file)
     response['Content-Type'] = 'application/octet-stream'
     response['Content-Disposition'] = 'attachment;filename="fig1.png"'
