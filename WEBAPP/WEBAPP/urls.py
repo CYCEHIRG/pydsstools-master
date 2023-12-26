@@ -25,4 +25,5 @@ urlpatterns = [
     path('sim/', views.sim),
     path('download_bysection/', views.download_file1, name='download_bysection'),
     path('download_bytime/', views.download_file2, name='download_bytime'),
+    path('download_png/', views.download_png)
 ]
