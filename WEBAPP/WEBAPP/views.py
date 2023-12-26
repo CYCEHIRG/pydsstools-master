@@ -67,6 +67,7 @@ def download_file1(request):
     with app.app_context():
         section_name = request.GET.get('section_name', '')
         run_plot2(section_name)
+    file = open('./static/fig1.png', 'rb')
     return render(request,'showpic.html')
      
 def download_file2(request):
