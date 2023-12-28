@@ -113,6 +113,14 @@ def download_png(request):
     response['Content-Disposition'] = 'attachment;filename="fig1.png"'
     return response
 
+def download_csv(request):
+    #總之跟download_file1()同理
+    file = open('/WEBAPP/RESULT.csv', 'rb')
+    response = FileResponse(file)
+    response['Content-Type'] = 'application/octet-stream'
+    response['Content-Disposition'] = 'attachment;filename="RESULT.csv"'
+    return response
+
 
 def run_plot(time_value):
     #本繪圖模組不會有問題，不用動
@@ -134,6 +142,7 @@ def run_plot(time_value):
     plt.xlabel('Crosssections')
     plt.ylabel('Flow')
     plt.savefig('./static/fig1.png')
+    np.savetxt('/WEBAPP/RESULT.csv', y, delimiter=",")   
     plt.close()
     y = np.empty_like(y)
     idx = np.empty_like(idx)
@@ -190,6 +199,7 @@ def run_plot2(section_name):
                 plt.title(f'NO.{section_name} {TYPE} Data')
                 plt.xlabel('Times')
                 plt.ylabel('ELEV')
+                np.savetxt('/WEBAPP/RESULT.csv', y1, delimiter=",")
             else:
                 x2 = x[:-5]
                 y2 = y[:-5] 
@@ -197,7 +207,8 @@ def run_plot2(section_name):
                 plt.plot(x2,y2,color = 'g',linewidth ='1')
                 plt.title(f'NO.{section_name} {TYPE} Data')             
                 plt.xlabel('Times')
-                plt.ylabel('Flow')    
+                plt.ylabel('Flow') 
+                np.savetxt('/WEBAPP/RESULT.csv', y2, delimiter=",")   
         x = []
         y = []      
         k = k + 1
