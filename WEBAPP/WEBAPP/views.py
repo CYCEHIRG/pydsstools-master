@@ -54,14 +54,44 @@ def sim(request):
     # 由於建模時的設置問題，以Linux版本模擬後的.dss結果文件名可能會包含WINDOWS的路徑，為了確保能夠呼叫因此在這裡重新命名
     subprocess.run(['mv *.dss example.dss'], shell=True)
     #以下為獲取模擬結果的路徑，用於輸入
+    # obs = [3.29,3.31,3.3,3.2,3.06,3.04,3.04,3.07,3.08,3.03,3.04,3.2,3.29,3.24
+    #        ,3.22,3.21,3.23,3.25,3.24,3.25,3.27,3.26,3.2,3.01,3.18]
+    # average_obs = sum(obs)/len(obs)
+    average_obs = 1
     dss_file = "/WEBAPP/example.dss"
+    pathname_pattern ="/*/*/LOCATION-ELEV/*/*/*/"
+    y=[]
+    fid = HecDss.Open(dss_file)
+
+
+    path_list = fid.getPathnameList(pathname_pattern,sort=1)
+    for i in range(len(path_list)):
+        # 讀取所有模擬的時間點
+        pd = fid.read_pd(path_list[i])
+        # 讀取單一時間點
+        idx = pd.index.tolist()
+        pd.insert(0,pd.index.name,idx)
+        pd.index = range(1,pd.shape[0] + 1)
+        np.array(idx)
+        # 上面四行總之是為了x及y而建，通常不會動，有要動再問
+        value = np.array(pd.iloc[:,1].values)
+        # 讀取水位or流量資料
+        y.append(value[26])
+        
+        # 讀取該斷面於所有模擬時間點的流量or水位
+    average_y = sum(y)/len(y)
+    result = average_y/average_obs
+
     pathname_pattern = "/*/*/*/*/*/*/"
     with Open(dss_file) as fid:
         path_list = fid.getPathnameList(pathname_pattern, sort=1)
         result = []
         result.extend(path_list)
     
-    return render(request, 'result.html', {'result': result})
+    if result < 1:
+        return render(request, 'result.html', {'result': result})
+    else:
+        return render(request, 'result_warning.html', {'result': result})
 
 def download_file1(request):
     with app.app_context():
@@ -115,10 +145,6 @@ def run_plot2(section_name):
     #因HEC-RAS中沒有指儲存單一斷面結果的路徑，因此另外撰寫
     #只繪製單一斷面結果的圖，由使用者輸入數字給定
     #目前限制不得輸入負數，若有需要得以在result.html中修改
-    # obs = [3.29,3.31,3.3,3.2,3.06,3.04,3.04,3.07,3.08,3.03,3.04,3.2,3.29,3.24
-    #        ,3.22,3.21,3.23,3.25,3.24,3.25,3.27,3.26,3.2,3.01,3.18]
-    # average_obs = sum(obs)/len(obs)
-    average_obs = 1
     x = []
     y = []
     #更改字串數字格式
@@ -158,18 +184,12 @@ def run_plot2(section_name):
             if k == 1:
                 x1 = x[:-5]
                 y1 = y[:-5]
-                while i == 26:
-                    average_sim = sum(y1)/len(y1)
-                    result = average_sim/average_obs
                 # xobs = np.arange(0,25)
                 plt.subplot(2,1, k)
                 plt.plot(x1,y1,color = 'b',linewidth ='1',label = 'sim')
                 # line2, = plt.plot(xobs,obs,color = 'r', linewidth = '1',label = 'obs')
                 # plt.legend(handles = [line1,line2],loc = 'upper right')
-                if result >= 1:
-                    plt.title(f'NO.{section_name} {TYPE} Data')
-                else:
-                    plt.title(f'NO.{section_name} {TYPE} Data--WARNING')
+                plt.title(f'NO.{section_name} {TYPE} Data')
                 plt.xlabel('Times')
                 plt.ylabel('ELEV')
             else:
@@ -177,10 +197,7 @@ def run_plot2(section_name):
                 y2 = y[:-5] 
                 plt.subplot(2,1, k) 
                 plt.plot(x2,y2,color = 'g',linewidth ='1')
-                if result >= 1:
-                    plt.title(f'NO.{section_name} {TYPE} Data')
-                else:
-                    plt.title(f'NO.{section_name} {TYPE} Data--WARNING')                 
+                plt.title(f'NO.{section_name} {TYPE} Data')             
                 plt.xlabel('Times')
                 plt.ylabel('Flow')    
         x = []
