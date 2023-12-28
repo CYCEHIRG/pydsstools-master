@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <title>HEC-RAS模擬程式</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+</head>
+<body>
+    <h1>HEC-RAS模擬程式</h1>
+    <h2>WARNING!!</h2>
+
+    <div class="input-container">
+        <form action="https://5953.zeabur.app/download_bysection/" method="get" onsubmit="return validateSectionName();">
+            <label for="section_input">输入斷面編號：</label>
+            <input type="text" id="section_input" name="section_name" required>
+            <input type="submit" value="下載單一斷面之结果">
+        </form>
+
+        <form action="https://5953.zeabur.app/download_bytime/" method="get">
+            <label for="time_input">输入時間：</label>
+            <select id="time_input" name="time_value" required>
+                {% for option in result %}
+                    <option value="{{ option }}">{{ option }}</option>
+                {% endfor %}
+            </select>
+            <input type="submit" value="下載單一斷面之结果">            
+            <p>Hint1：09AUG2009 0035代表2009/8/9 00:35</p>
+            <p>Hint2：LOCATION-ELEV =水位
+                LOCATION-FLOW = 流量
+            </p>
+        </form>
+    </div>
+
+    <div class="results-container">
+        <iframe src="https://www.google.com/maps/d/u/0/embed?mid=1ss78RMtHDFsqYSoG9x2ddFPxhLqGbrc&ehbc=2E312F" width="640" height="480"></iframe>
+    </div>
+
+    <script>
+        // When the page is loaded, remove the "hidden" class to trigger the fade-in animation
+        document.addEventListener("DOMContentLoaded", function() {
+            document.body.style.opacity = 1;
+        });
+    </script>
+</body>
+
+</html>
