@@ -145,6 +145,10 @@
         color: #3498db;
         text-align: center;
     }
+    h2 {
+        font-size:xx-large;
+        color: #f90404;
+    }
     
     form {
         background-color: #fff;
