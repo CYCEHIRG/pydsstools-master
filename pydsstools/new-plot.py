@@ -25,7 +25,7 @@ for i in range(len(path_list)):
     # x軸為第幾個時間點，如果該模擬檔為5分鐘模擬一次，則為間隔第i個五分鐘
     value = np.array(pd.iloc[:,1].values)
     # 讀取水位or流量資料
-    y.append(value[1])
+    y.append(value[26])
     # 讀取該斷面於所有模擬時間點的流量or水位   
 
 plt.plot(x,y)
