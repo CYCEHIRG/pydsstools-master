@@ -80,7 +80,7 @@ def sim(request):
         
         # 讀取該斷面於所有模擬時間點的流量or水位
     average_y = sum(y)/len(y)
-    result = average_y/average_obs
+    SCORE = average_y/average_obs
 
     pathname_pattern = "/*/*/*/*/*/*/"
     with Open(dss_file) as fid:
@@ -88,7 +88,7 @@ def sim(request):
         result = []
         result.extend(path_list)
     
-    if result < 1:
+    if SCORE < 1:
         return render(request, 'result.html', {'result': result})
     else:
         return render(request, 'result_warning.html', {'result': result})
