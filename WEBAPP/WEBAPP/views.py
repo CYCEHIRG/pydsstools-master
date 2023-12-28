@@ -92,6 +92,7 @@ def sim(request):
         return render(request, 'result_warning.html', {'result': result})
 
 def download_file1(request):
+    #懶得改了，這是進到閱覽頁面的地方
     with app.app_context():
         section_name = request.GET.get('section_name', '')
         run_plot2(section_name)
@@ -99,14 +100,13 @@ def download_file1(request):
     return render(request,'showpic.html')
      
 def download_file2(request):
-    #總之跟download_file1()同理
+    #懶得改了，這是進到閱覽頁面的地方
     with app.app_context():
         time_value = request.GET.get('time_value', '')
         run_plot(time_value)
     return render(request,'showpic.html')
 
 def download_png(request):
-    #總之跟download_file1()同理
     file = open('./static/fig1.png', 'rb')
     response = FileResponse(file)
     response['Content-Type'] = 'application/octet-stream'
@@ -114,7 +114,6 @@ def download_png(request):
     return response
 
 def download_csv(request):
-    #總之跟download_file1()同理
     file = open('/WEBAPP/RESULT.csv', 'rb')
     response = FileResponse(file)
     response['Content-Type'] = 'application/octet-stream'
