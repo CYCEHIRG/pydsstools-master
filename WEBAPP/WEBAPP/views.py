@@ -207,7 +207,7 @@ def run_plot2(section_name):
                 plt.title(f'NO.{section_name} {TYPE} Data')             
                 plt.xlabel('Times')
                 plt.ylabel('Flow') 
-                np.savetxt('/WEBAPP/RESULT.csv', y2, delimiter=",")   
+                # np.savetxt('/WEBAPP/RESULT.csv', y2, delimiter=",")   
         x = []
         y = []      
         k = k + 1
