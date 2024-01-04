@@ -2,7 +2,7 @@
 @charset"utf-8";
 
 /* 平台查詢 */
-/* 小于等于991像素的屏幕，例如手机 */
+/* 小於或等於991px的螢幕*/
 @media screen and (max-width: 991px) {
     body {
         font-family: 'Arial', sans-serif;
@@ -31,7 +31,7 @@
         border-radius: 8px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         text-align: center;
-        width: 90%;  /* 根据需要调整宽度 */
+        width: 90%;  
     }
 
     input[type="file"] {
@@ -122,7 +122,6 @@
         width: 700px;
     }
 
-    /* 添加更多媒体查询下的样式调整 */
 }
 
 /* 大於等於992px */
