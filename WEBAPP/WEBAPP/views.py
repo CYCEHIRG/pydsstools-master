@@ -198,7 +198,7 @@ def run_plot2(section_name):
                 plt.title(f'NO.{section_name} {TYPE} Data')
                 plt.xlabel('Times')
                 plt.ylabel('ELEV')
-                np.savetxt('/WEBAPP/RESULT.csv', y1, delimiter=",")
+                np.savetxt('/WEBAPP/RESULT.csv', y1,header='ELEV', delimiter=",")
             else:
                 x2 = x[:-5]
                 y2 = y[:-5] 
@@ -208,7 +208,7 @@ def run_plot2(section_name):
                 plt.xlabel('Times')
                 plt.ylabel('Flow')
                 opentxt = open('/WEBAPP/RESULT.csv','a') 
-                np.savetxt(opentxt, y2, delimiter=",",fmt = '%.6f')   
+                np.savetxt(opentxt, y2, delimiter=",",header='FLOW')   
                 opentxt.close()
         x = []
         y = []      
