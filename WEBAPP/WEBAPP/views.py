@@ -10,7 +10,7 @@ from pydsstools.heclib.dss import HecDss
 from pydsstools.heclib.dss.HecDss import Open
 import numpy as np
 import matplotlib.pyplot as plt
-import h5py
+import h5py,zipfile
 import sys,io,os
 from shutil import copyfile
 
@@ -114,10 +114,10 @@ def download_png(request):
     return response
 
 def download_csv(request):
-    file = open('/WEBAPP/RESULT.csv', 'rb')
+    file = open('/WEBAPP/result.zip', 'rb')
     response = FileResponse(file)
     response['Content-Type'] = 'application/octet-stream'
-    response['Content-Disposition'] = 'attachment;filename="RESULT.csv"'
+    response['Content-Disposition'] = 'attachment;filename="result.zip"'
     return response
 
 
@@ -207,13 +207,16 @@ def run_plot2(section_name):
                 plt.title(f'NO.{section_name} {TYPE} Data')             
                 plt.xlabel('Times')
                 plt.ylabel('Flow')
-                opentxt = open('/WEBAPP/RESULT.csv','a') 
-                np.savetxt(opentxt, y2, delimiter=",",header='FLOW')   
-                opentxt.close()
+                np.savetxt('/WEBAPP/RESULT2.csv', y2, delimiter=",",header='FLOW')   
         x = []
         y = []      
         k = k + 1
     plt.tight_layout()
     plt.savefig('./static/fig1.png')
     plt.close()
+    with zipfile.ZipFile('/WEBAPP/result.zip', mode='w') as zf:
+        # 將要壓縮的檔案加入
+        zf.write("/WEBAPP/RESULT.csv")
+        zf.write("/WEBAPP/RESULT2.csv")
+
 # Create your views here.
