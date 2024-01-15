@@ -145,6 +145,10 @@ def run_plot(time_value):
     plt.close()
     y = np.empty_like(y)
     idx = np.empty_like(idx)
+    with zipfile.ZipFile('/WEBAPP/result.zip', mode='w') as zf:
+        # 將要壓縮的檔案加入
+        zf.write("/WEBAPP/RESULT.csv")
+
 
 
 def run_plot2(section_name):
