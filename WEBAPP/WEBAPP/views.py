@@ -94,15 +94,12 @@ def sim(request):
     return render(request, 'result.html', {'result': result})
 
 def load_warning_data(request):
-    # 读取 warning_data.csv 数据
     warning_data_path = os.path.join(os.path.dirname(__file__), 'static', 'warning_data.csv')
     if os.path.exists(warning_data_path):
         warning_df = pd.read_csv(warning_data_path)
-        # 将数据转换为 HTML 表格格式
+ 
         warning_html = warning_df.to_html(index=False)
         return HttpResponse(warning_html)
-    else:
-        return HttpResponse("Warning data not found.")
     
 def download_file1(request):
     #懶得改了，這是進到閱覽頁面的地方
