@@ -18,6 +18,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from . import views
+from .views import show_warning, load_warning_data
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -26,5 +27,6 @@ urlpatterns = [
     path('download_bysection/', views.download_file1, name='download_bysection'),
     path('download_bytime/', views.download_file2, name='download_bytime'),
     path('download_png/', views.download_png),
-    path('download_csv/', views.download_csv)
+    path('download_csv/', views.download_csv),
+    path('load_warning_data/', load_warning_data, name='load_warning_data'),
 ]
