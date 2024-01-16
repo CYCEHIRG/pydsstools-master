@@ -64,6 +64,7 @@ def sim(request):
     pathname_pattern ="/*/*/LOCATION-ELEV/*/*/*/"
     y=[]
     war=[]
+    x=[]
     fid = HecDss.Open(dss_file)
     path_list = fid.getPathnameList(pathname_pattern,sort=1)
     for i in range(len(path_list)):
@@ -77,9 +78,10 @@ def sim(request):
         # 上面四行總之是為了x及y而建，通常不會動，有要動再問
         value = np.array(pd.iloc[:,1].values)
         # 讀取水位or流量資料
-        y.append(value[-26::12])
+        y.append(value[-26])
         
         # 讀取該斷面於所有模擬時間點的流量or水位
+    x.append(y[::12])
     for i in range(len(y)):
         if y[i] >= obs[i]:
             war.append(i+1)
