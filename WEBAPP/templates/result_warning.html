@@ -9,6 +9,14 @@
 <body>
     <h1>HEC-RAS模擬程式</h1>
     <h2>WARNING!!</h2>
+    {% if above_obs_indices %}
+  <p>以下時間點的水位：</p>
+  <ul>
+    {% for index in above_obs_indices %}
+      <li>{{ index }}</li>
+    {% endfor %}
+  </ul>
+{% endif %}
 
     <div class="input-container">
         <form action="https://5953.zeabur.app/download_bysection/" method="get" onsubmit="return validateSectionName();">
