@@ -12,6 +12,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import h5py,zipfile
 import sys,io,os
+import pandas as pd
 from shutil import copyfile
 
 folder_path = '/WEBAPP'
@@ -62,6 +63,7 @@ def sim(request):
     dss_file = "/WEBAPP/example.dss"
     pathname_pattern ="/*/*/LOCATION-ELEV/*/*/*/"
     y=[]
+    war=[]
     fid = HecDss.Open(dss_file)
     path_list = fid.getPathnameList(pathname_pattern,sort=1)
     for i in range(len(path_list)):
@@ -78,8 +80,10 @@ def sim(request):
         y.append(value[-26::12])
         
         # 讀取該斷面於所有模擬時間點的流量or水位
-    average_y = sum(y)/len(y)
-    SCORE = average_y/average_obs
+    for i in range(len(y)):
+        if y[i] >= obs[i]:
+            war.append(i+1)
+    np.savetxt('./static/warning_data.csv', war, delimiter=",")
 
     pathname_pattern = "/*/*/*/*/*/*/"
     with Open(dss_file) as fid:
@@ -87,16 +91,19 @@ def sim(request):
         result = []
         result.extend(path_list)
     
-    if SCORE < 1:
-        return render(request, 'result.html', {'result': result})
+    return render(request, 'result.html', {'result': result})
+
+def load_warning_data(request):
+    # 读取 warning_data.csv 数据
+    warning_data_path = os.path.join(os.path.dirname(__file__), 'static', 'warning_data.csv')
+    if os.path.exists(warning_data_path):
+        warning_df = pd.read_csv(warning_data_path)
+        # 将数据转换为 HTML 表格格式
+        warning_html = warning_df.to_html(index=False)
+        return HttpResponse(warning_html)
     else:
-        y_flattened = np.concatenate(y)
-        obs = np.array(obs)
-        above_obs_indices = np.where(y_flattened > obs)[0]
-        if above_obs_indices.any():
-            return render(request, 'result_warning.html', {'result': result, 'above_obs_indices': above_obs_indices.tolist()})
-        else:
-            return render(request, 'result_warning.html', {'result': result, 'above_obs_indices': None})
+        return HttpResponse("Warning data not found.")
+    
 def download_file1(request):
     #懶得改了，這是進到閱覽頁面的地方
     with app.app_context():
