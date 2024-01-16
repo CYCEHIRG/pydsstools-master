@@ -9,15 +9,8 @@
 <body>
     <h1>HEC-RAS模擬程式</h1>
     <h2>WARNING!!</h2>
-    {% if above_obs_indices %}
-  <p>以下時間點的水位：</p>
-  <ul>
-    {% for index in above_obs_indices %}
-      <li>{{ index }}</li>
-    {% endfor %}
-  </ul>
-{% endif %}
-
+    <button onclick="loadWarningData()">Load Warning Data</button>
+    <div id="warningData"></div>
     <div class="input-container">
         <form action="https://5953.zeabur.app/download_bysection/" method="get" onsubmit="return validateSectionName();">
             <label for="section_input">输入斷面編號：</label>
@@ -49,6 +42,18 @@
         document.addEventListener("DOMContentLoaded", function() {
             document.body.style.opacity = 1;
         });
+        function loadWarningData() {
+            // 使用 JavaScript 发送 AJAX 请求获取数据
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    // 将获取的数据显示在网页上
+                    document.getElementById("warningData").innerHTML = xhr.responseText;
+                }
+            };
+            xhr.open("GET", "/load_warning_data/", true);
+            xhr.send();
+        }
     </script>
 </body>
 
