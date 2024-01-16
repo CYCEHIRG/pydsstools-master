@@ -93,8 +93,10 @@ def sim(request):
         y_flattened = np.concatenate(y)
         obs = np.array(obs)
         above_obs_indices = np.where(y_flattened > obs)[0]
-        return render(request, 'result_warning.html', {'result': result, 'above_obs_indices': above_obs_indices.tolist()})
-
+        if above_obs_indices.any():
+            return render(request, 'result_warning.html', {'result': result, 'above_obs_indices': above_obs_indices.tolist()})
+        else:
+            return render(request, 'result_warning.html', {'result': result, 'above_obs_indices': None})
 def download_file1(request):
     #懶得改了，這是進到閱覽頁面的地方
     with app.app_context():
