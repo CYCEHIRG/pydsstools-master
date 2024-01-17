@@ -53,21 +53,21 @@
              // 修改 location 属性来实现重定向
              window.location.href = '/load_warning_data/';
             });
-            var button = document.querySelector('.popuptest');
-            var showtxt = document.querySelector('.show');
-            function popup2() {
-                // 使用 Confirm Box 顯示確認訊息
-                var confirmed = window.confirm('確認要顯示 JSON 數據嗎？');
-                if (confirmed) {
-                    // 模擬獲取的 JSON 數據
-                    var jsonData = { key1: '警戒時間(hr)', key2: 'value2' };
-                    // 將 JSON 數據轉換為字符串並顯示
-                    showtxt.innerHTML = '<pre>' + JSON.stringify(jsonData, null, 2) + '</pre>';
-                } else {
-                    showtxt.innerHTML = '您已取消顯示 JSON 數據';
-                }
-            }
-            button.addEventListener('click', popup2);
+            // var button = document.querySelector('.popuptest');
+            // var showtxt = document.querySelector('.show');
+            // function popup2() {
+            //     // 使用 Confirm Box 顯示確認訊息
+            //     var confirmed = window.confirm('確認要顯示 JSON 數據嗎？');
+            //     if (confirmed) {
+            //         // 模擬獲取的 JSON 數據
+            //         var jsonData = { key1: '警戒時間(hr)', key2: 'value2' };
+            //         // 將 JSON 數據轉換為字符串並顯示
+            //         showtxt.innerHTML = '<pre>' + JSON.stringify(jsonData, null, 2) + '</pre>';
+            //     } else {
+            //         showtxt.innerHTML = '您已取消顯示 JSON 數據';
+            //     }
+            // }
+            // button.addEventListener('click', popup2);
     </script>
 </body>
 
