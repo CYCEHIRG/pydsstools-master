@@ -98,7 +98,7 @@ def sim(request):
 def load_warning_data(request):
     warning_df = pd.read_csv('./static/warning_data.csv')
     warning_df.columns = ['(hr)']
-    warning_json = warning_df.to_json(orient='split')
+    warning_json = warning_df.to_json(orient='records')
  
     return JsonResponse({'Warning Time': warning_json})
     
