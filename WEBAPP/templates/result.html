@@ -3,14 +3,16 @@
 <head>
     {% load static %}
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HEC-RAS模擬程式</title>
     <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
 </head>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <body>
     <h1>HEC-RAS模擬程式</h1>
-    <button id="showWarningData">Show Warning Data</button>
-
+    <input class='popuptest' type="button" value="按我">
+    <p class='show'></p>
     <div class="input-container">
         <form action="https://5953.zeabur.app/download_bysection/" method="get" onsubmit="return validateSectionName();">
             <label for="section_input">输入斷面編號：</label>
@@ -46,6 +48,25 @@
         document.addEventListener("DOMContentLoaded", function() {
             document.body.style.opacity = 1;
         });
+        var button = document.querySelector('.popuptest');
+        var showtxt = document.querySelector('.show');
+
+        function popup2() {
+            // 使用 Confirm Box 顯示確認訊息
+            var confirmed = window.confirm('確認要顯示JSON數據嗎？');
+
+            if (confirmed) {
+                // 模擬獲取的JSON數據
+                var jsonData = { key1: 'value1', key2: 'value2' };
+
+                // 將JSON數據轉換為字符串並顯示
+                showtxt.innerHTML = '<pre>' + JSON.stringify(jsonData, null, 2) + '</pre>';
+            } else {
+                showtxt.innerHTML = '您已取消顯示JSON數據';
+            }
+        }
+
+        button.addEventListener('click', popup2);
     </script>
 </body>
 
