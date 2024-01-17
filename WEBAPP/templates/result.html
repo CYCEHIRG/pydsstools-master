@@ -12,10 +12,7 @@
 <body>
     <h1>HEC-RAS模擬程式</h1>
     <button id="showWarningData">Show Warning Data</button>
-    <div id="warningPopup" style="display: none;">
-        <pre id="warningData"></pre>
-        <button onclick="closePopup()">Close</button>
-    </div>
+
     <div class="input-container">
         <form action="https://5953.zeabur.app/download_bysection/" method="get" onsubmit="return validateSectionName();">
             <label for="section_input">输入斷面編號：</label>
@@ -40,6 +37,10 @@
 
     <div class="results-container">
         <iframe src="https://www.google.com/maps/d/u/0/embed?mid=1ss78RMtHDFsqYSoG9x2ddFPxhLqGbrc&ehbc=2E312F" width="640" height="480"></iframe>
+    </div>
+    <div id="warningPopup" style="display: none;">
+        <pre id="warningData"></pre>
+        <button onclick="closePopup()">Close</button>
     </div>
 
     <script>
