@@ -97,10 +97,10 @@ def sim(request):
 
 def load_warning_data(request):
     warning_df = pd.read_csv('./static/warning_data.csv')
-    warning_df.columns = ['警戒時間(hr)']
+    warning_df.columns = ['(hr)']
     warning_json = warning_df.to_json(orient='records')
  
-    return JsonResponse({'data': warning_json})
+    return JsonResponse({'Warning': warning_json})
     
 def download_file1(request):
     #懶得改了，這是進到閱覽頁面的地方
