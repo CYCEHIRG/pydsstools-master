@@ -43,14 +43,18 @@
         document.addEventListener("DOMContentLoaded", function() {
             document.body.style.opacity = 1;
         });
-        function loadWarningData() {
+    function loadWarningData() {
     // 使用 jQuery 的 AJAX 请求
     $.ajax({
-        url: "/load_warning_data/",  // 这里的路径应该匹配你的 Django 路由设置
+        url: "https://5953.zeabur.app/load_warning_data/",  // 这里的路径应该匹配你的 Django 路由设置
         type: "GET",
         success: function(data) {
-            // 请求成功时，将数据显示在页面上
-            $("#warningData").html(data);
+            // 请求成功时，打开一个新的浮动窗口，并将数据显示在其中
+            var newWindow = window.open("", "_blank", "width=600, height=400");
+            newWindow.document.write("<html><head><title>Warning Data</title></head><body>");
+            newWindow.document.write("<h2>Warning Data</h2>");
+            newWindow.document.write(data);
+            newWindow.document.write("</body></html>");
         },
         error: function(error) {
             console.log("Error loading warning data:", error);
