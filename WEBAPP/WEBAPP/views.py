@@ -83,7 +83,7 @@ def sim(request):
         # 讀取該斷面於所有模擬時間點的流量or水位
     x.append(y[::12])
     for i in range(len(obs)):
-        if int(x[i][0]) >= int(obs[i]):
+        if int(x[i]) >= int(obs[i]):
             war.append(i+1)
     np.savetxt('./static/warning_data.csv', war, delimiter=",")
 
