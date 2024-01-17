@@ -5,7 +5,7 @@ import subprocess
 import glob
 from django.conf import settings
 from django.core.files.storage import FileSystemStorage
-from django.http import FileResponse, HttpResponse
+from django.http import FileResponse, HttpResponse, JsonResponse
 from pydsstools.heclib.dss import HecDss
 from pydsstools.heclib.dss.HecDss import Open
 import numpy as np
@@ -96,12 +96,10 @@ def sim(request):
     return render(request, 'result.html', {'result': result})
 
 def load_warning_data(request):
-    warning_data_path = os.path.join(os.path.dirname(__file__), 'static', 'warning_data.csv')
-    if os.path.exists(warning_data_path):
-        warning_df = pd.read_csv(warning_data_path)
+    warning_df = pd.read_csv('./static/warning_data.csv')
+    warning_json = warning_df.to_json(orient='records')
  
-        warning_html = warning_df.to_html(index=False)
-        return HttpResponse(warning_html)
+    return JsonResponse({'data': warning_json})
     
 def download_file1(request):
     #懶得改了，這是進到閱覽頁面的地方
