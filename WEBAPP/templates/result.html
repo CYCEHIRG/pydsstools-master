@@ -46,7 +46,7 @@
     function loadWarningData() {
     // 使用 jQuery 的 AJAX 请求
     $.ajax({
-        url: "https://5953.zeabur.app/load_warning_data/",  // 这里的路径应该匹配你的 Django 路由设置
+        url: "/load_warning_data/",  // 这里的路径应该匹配你的 Django 路由设置
         type: "GET",
         success: function(data) {
             // 请求成功时，打开一个新的浮动窗口，并将数据显示在其中
