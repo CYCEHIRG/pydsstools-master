@@ -6,6 +6,7 @@
     <title>HEC-RAS模擬程式</title>
     <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
 </head>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <body>
     <h1>HEC-RAS模擬程式</h1>
     <button onclick="loadWarningData()">Load Warning Data</button>
@@ -42,6 +43,20 @@
         document.addEventListener("DOMContentLoaded", function() {
             document.body.style.opacity = 1;
         });
+        function loadWarningData() {
+    // 使用 jQuery 的 AJAX 请求
+    $.ajax({
+        url: "/load_warning_data/",  // 这里的路径应该匹配你的 Django 路由设置
+        type: "GET",
+        success: function(data) {
+            // 请求成功时，将数据显示在页面上
+            $("#warningData").html(data);
+        },
+        error: function(error) {
+            console.log("Error loading warning data:", error);
+        }
+    });
+}
     </script>
 </body>
 
