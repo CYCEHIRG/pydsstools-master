@@ -11,7 +11,7 @@
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <body>
     <h1>HEC-RAS模擬程式</h1>
-    <input class='load-warning-data' type="button" value="按我">
+    <input class='popuptest' type="button" value="按我">
     <p class='show'></p>
     <div class="input-container">
         <form action="https://5953.zeabur.app/download_bysection/" method="get" onsubmit="return validateSectionName();">
@@ -48,37 +48,26 @@
         document.addEventListener("DOMContentLoaded", function() {
             document.body.style.opacity = 1;
         });
-        $(document).ready(function() {
-            // 点击按钮时的事件处理
-            $('.load-warning-data').click(function() {
-                // 使用 AJAX 获取警戒时间数据
-                $.ajax({
-                    url: '/load_warning_data/',  // 修改为你的实际后端接口地址
-                    type: 'GET',
-                    success: function(response) {
-                        // 解析 JSON 数据
-                        var jsonData = JSON.parse(response.data);
-
-                        // 构建显示的字符串
-                        var displayText = '警戒時間(hr) {';
-                        for (var i = 0; i < jsonData.length; i++) {
-                            displayText += jsonData[i]['警戒時間'];
-
-                            if (i < jsonData.length - 1) {
-                                displayText += '、';
-                            }
-                        }
-                        displayText += '}';
-
-                        // 将构建好的字符串显示在页面上
-                        $('#warningData').text(displayText);
-                    },
-                    error: function(error) {
-                        console.log('Error:', error);
-                    }
-                });
+        // 修改按钮的 class，使用 jQuery 来绑定事件
+        $('.popuptest').click(function() {
+             // 修改 location 属性来实现重定向
+             window.location.href = '/load_warning_data/';
             });
-        });
+            var button = document.querySelector('.popuptest');
+            var showtxt = document.querySelector('.show');
+            function popup2() {
+                // 使用 Confirm Box 顯示確認訊息
+                var confirmed = window.confirm('確認要顯示 JSON 數據嗎？');
+                if (confirmed) {
+                    // 模擬獲取的 JSON 數據
+                    var jsonData = { key1: '警戒時間(hr)', key2: 'value2' };
+                    // 將 JSON 數據轉換為字符串並顯示
+                    showtxt.innerHTML = '<pre>' + JSON.stringify(jsonData, null, 2) + '</pre>';
+                } else {
+                    showtxt.innerHTML = '您已取消顯示 JSON 數據';
+                }
+            }
+            button.addEventListener('click', popup2);
     </script>
 </body>
 
