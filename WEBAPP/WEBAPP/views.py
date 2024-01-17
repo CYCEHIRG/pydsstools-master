@@ -100,7 +100,7 @@ def load_warning_data(request):
     warning_df.columns = ['(hr)']
     warning_json = warning_df.to_json(orient='records')
  
-    return JsonResponse({'Warning Time': warning_json})
+    return JsonResponse({'Warning Times': warning_json})
     
 def download_file1(request):
     #懶得改了，這是進到閱覽頁面的地方
