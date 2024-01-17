@@ -46,17 +46,6 @@
         document.addEventListener("DOMContentLoaded", function() {
             document.body.style.opacity = 1;
         });
-        // 點擊按鈕時觸發事件，顯示彈出視窗
-        document.getElementById('showWarningData').addEventListener('click', function() {
-            var warningData = {{ data|safe }};
-            document.getElementById('warningData').innerText = JSON.stringify(warningData, null, 2);
-            document.getElementById('warningPopup').style.display = 'block';
-        });
-
-        // 關閉彈出視窗
-        function closePopup() {
-            document.getElementById('warningPopup').style.display = 'none';
-        }
     </script>
 </body>
 
