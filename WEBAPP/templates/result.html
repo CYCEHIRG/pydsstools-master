@@ -11,7 +11,13 @@
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <body>
     <h1>HEC-RAS水理微服務</h1>
-    <input class='popuptest' type="button" value="顯示預警時間">
+    <!-- 添加顯示預警時間的按鈕 -->
+    <button class='popuptest'>顯示預警時間</button>
+    <!-- 顯示預警時間的區域 -->
+    <div id="warningPopup" style="display: none;">
+        <pre id="warningData"></pre>
+        <button onclick="closePopup()">Close</button>
+    </div>
     <p class='show'></p>
     <div class="input-container">
         <form action="https://5953.zeabur.app/download_bysection/" method="get" onsubmit="return validateSectionName();">
@@ -38,36 +44,28 @@
     <div class="results-container">
         <iframe src="https://www.google.com/maps/d/u/0/embed?mid=1ss78RMtHDFsqYSoG9x2ddFPxhLqGbrc&ehbc=2E312F" width="640" height="480"></iframe>
     </div>
-    <div id="warningPopup" style="display: none;">
-        <pre id="warningData"></pre>
-        <button onclick="closePopup()">Close</button>
-    </div>
 
     <script>
         // When the page is loaded, remove the "hidden" class to trigger the fade-in animation
         document.addEventListener("DOMContentLoaded", function() {
             document.body.style.opacity = 1;
         });
-        // 修改按钮的 class，使用 jQuery 来绑定事件
+
+        // 使用 jQuery 簡化顯示預警時間的操作
         $('.popuptest').click(function() {
-             // 修改 location 属性来实现重定向
-             window.location.href = '/load_warning_data/';
+            // 發送 AJAX 請求以獲取預警時間數據
+            $.get("/load_warning_data/", function(data) {
+                // 將數據填充到預警時間區域
+                $('#warningData').html(data['Warning Time']);
+                // 顯示預警時間區域
+                $('#warningPopup').show();
             });
-            // var button = document.querySelector('.popuptest');
-            // var showtxt = document.querySelector('.show');
-            // function popup2() {
-            //     // 使用 Confirm Box 顯示確認訊息
-            //     var confirmed = window.confirm('確認要顯示 JSON 數據嗎？');
-            //     if (confirmed) {
-            //         // 模擬獲取的 JSON 數據
-            //         var jsonData = { key1: '警戒時間(hr)', key2: 'value2' };
-            //         // 將 JSON 數據轉換為字符串並顯示
-            //         showtxt.innerHTML = '<pre>' + JSON.stringify(jsonData, null, 2) + '</pre>';
-            //     } else {
-            //         showtxt.innerHTML = '您已取消顯示 JSON 數據';
-            //     }
-            // }
-            // button.addEventListener('click', popup2);
+        });
+
+        // 關閉預警時間區域的函數
+        function closePopup() {
+            $('#warningPopup').hide();
+        }
     </script>
 </body>
 
