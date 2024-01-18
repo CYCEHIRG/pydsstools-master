@@ -55,7 +55,7 @@
         $('.popuptest').click(function() {
             // 發送 AJAX 請求以獲取預警時間數據
             $.get("/load_warning_data/", function(data) {
-                // 將數據填充到預警時間區域
+                // 將數據填充到預警時間區域中
                 $('#warningData').html(data['Warning Time']);
                 // 顯示預警時間區域
                 $('#warningPopup').show();
