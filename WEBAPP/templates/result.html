@@ -53,14 +53,29 @@
 
         // 使用 jQuery 簡化顯示預警時間的操作
         $('.popuptest').click(function() {
-            // 發送 AJAX 請求以獲取預警時間數據
-            $.get("/load_warning_data/", function(data) {
-                // 將數據填充到預警時間區域中
-                $('#warningData').html(data['Warning Times']);
-                // 顯示預警時間區域
-                $('#warningPopup').show();
-            });
-        });
+    // 發送 AJAX 請求以獲取預警時間數據
+    $.get("/load_warning_data/", function(data) {
+        // 將數據轉換為表格
+        var tableHtml = '<table>';
+        var jsonData = JSON.parse(data['Warning Times']);
+        
+        // 添加表頭
+        tableHtml += '<tr><th>預警時間(hr)</th></tr>';
+        
+        // 遍歷數據，添加每一行
+        for (var i = 0; i < jsonData.length; i++) {
+            tableHtml += '<tr><td>' + jsonData[i]['(hr)'] + '</td></tr>';
+        }
+        
+        tableHtml += '</table>';
+
+        // 將表格填充到預警時間區域中
+        $('#warningData').html(tableHtml);
+        
+        // 顯示預警時間區域
+        $('#warningPopup').show();
+    });
+});
 
         // 關閉預警時間區域的函數
         function closePopup() {
