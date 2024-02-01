@@ -149,8 +149,8 @@ def run_plot(time_value):
     print(y)
     plt.plot(idx,y)
     plt.title(pathname)
-    plt.xlabel('Crosssections')
-    plt.ylabel('Flow')
+    plt.xlabel('斷面')
+    plt.ylabel('Value')
     plt.savefig('./static/fig1.png')
     np.savetxt('/WEBAPP/RESULT.csv', y, delimiter=",")   
     plt.close()
@@ -211,7 +211,7 @@ def run_plot2(section_name):
                 # line2, = plt.plot(xobs,obs,color = 'r', linewidth = '1',label = 'obs')
                 # plt.legend(handles = [line1,line2],loc = 'upper right')
                 plt.title(f'NO.{section_name} {TYPE} Data')
-                plt.xlabel('Times')
+                plt.xlabel('模擬時間間隔')
                 plt.ylabel('ELEV')
                 np.savetxt('/WEBAPP/RESULT.csv', y1,header='ELEV', delimiter=",")
             else:
@@ -220,7 +220,7 @@ def run_plot2(section_name):
                 plt.subplot(2,1, k) 
                 plt.plot(x2,y2,color = 'g',linewidth ='1')
                 plt.title(f'NO.{section_name} {TYPE} Data')             
-                plt.xlabel('Times')
+                plt.xlabel('模擬時間間隔')
                 plt.ylabel('Flow')
                 np.savetxt('/WEBAPP/RESULT2.csv', y2, delimiter=",",header='FLOW')   
         x = []
