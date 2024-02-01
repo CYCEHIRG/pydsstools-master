@@ -171,7 +171,7 @@ def run_plot2(section_name):
     #更改字串數字格式
     section_index = int(section_name)
     #在獲取單一斷面之結果時陣列是反的，所以加上負號由後面開始取
-    section_index = -section_index+1
+    section_index = -section_index
     #目前.dss的名稱指定為example
     dss_file = '/WEBAPP/example.dss'
     #.dss指定的路徑格式，ELEV表示水位，FLOW表示流量
